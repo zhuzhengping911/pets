@@ -13,4 +13,15 @@
     2. Data ID中的config-client：对应客户端的配置spring.cloud.nacos.config.prefix，默认值为${spring.application.name}，即：服务名
     3. Data ID中的properties：对应客户端的配置spring.cloud.nacos.config.file-extension，默认值为properties
     4. Group的值DEFAULT_GROUP：对应客户端的配置spring.cloud.nacos.config.group，默认值为DEFAULT_GROUP
-    
+  # Nacos配置的多环境管理
+    1. ${spring.application.name}-${spring.profiles.active}.properties
+        使用后缀名进行管理，xxx.DEV.properties
+        需要添加spring.profiles.active=TEST
+        这种方式在项目与环境多的时候，配置内容就会显得非常混乱。配置列表中会看到各种不同应用，不同环境的配置交织在一起，非常不利于管理。
+    2. 通过区分Group来创建两个不同环境的配置内容,它们的Data ID是完全相同的，只是GROUP不同
+        xxx.properties DEV_GROUP/TEST_GROUP
+        spring.cloud.nacos.config.group=DEV_GROUP
+        由于会占用Group纬度，所以需要对Group的使用做好规划，毕竟与业务上的一些配置分组起冲突等问题。
+    3. 不同的命名空间下，可以存在相同的Group或Data ID的配置。Namespace的常用场景之一是不同环境的配置的区分隔离
+        spring.cloud.nacos.config.namespace=56b2f590-aa24-41f0-97dd-cdf5fee491a6
+        官方建议的方式
