@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.context.annotation.Bean;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
@@ -16,7 +17,8 @@ import org.springframework.web.client.RestTemplate;
  */
 
 @Slf4j
-@RestController("/rest")
+@RestController
+@RequestMapping("/rest")
 public class RestTemplateController {
 
     @Autowired
@@ -24,7 +26,7 @@ public class RestTemplateController {
 
     @GetMapping("/test")
     public String test() {
-        String result = restTemplate.getForObject("http://discovery-server/hello?name=didi", String.class);
+        String result = restTemplate.getForObject("http://discovery-server/hello?name=zzp", String.class);
         return "Return : " + result;
     }
 }
