@@ -1,10 +1,10 @@
-package com.animal.pets;
+package com.animal.discover;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class PetsApplicationTests {
+class DiscoverApplicationTests {
 
     @Test
     void contextLoads() {
